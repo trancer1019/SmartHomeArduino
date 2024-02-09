@@ -148,7 +148,8 @@ void SH_Rs485Controller::sendRegstate(uint8_t registerNumber, uint8_t registerVa
   uint8_t crcResult = calculateCRC4(data, dataLength);
 
   uint8_t data_send[] = { 0xAA, DeviceAdress, crcResult << 4 | 0x03, registerNumber, registerValue };
-  rs485Send(data_send, sizeof(data_send));
+  size_t data_sendLength = sizeof(data_send) / sizeof(data_send[0]);
+  rs485Send(data_send, data_sendLength);
 }
 
 //функция для отправки подтвержения записи регистра
@@ -159,7 +160,8 @@ void SH_Rs485Controller::sendConfirm(uint8_t registerNumber) {
   uint8_t crcResult = calculateCRC4(data, dataLength);
 
   uint8_t data_send[] = { 0xAA, DeviceAdress, crcResult << 4 | 0x04, registerNumber };
-  rs485Send(data_send, sizeof(data_send));
+  size_t data_sendLength = sizeof(data_send) / sizeof(data_send[0]);
+  rs485Send(data_send, data_sendLength);
 }
 
 extern uint8_t deviceReadRegister(uint8_t registerNumber);  //обявленеи внешней функции
