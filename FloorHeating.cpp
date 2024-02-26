@@ -49,22 +49,28 @@ void FloorHeating::set(uint8_t state)
 
 //считать состояние
 uint8_t FloorHeating::get() {
-  return gettemp();
+  int temp = round(gettemp());
+  return temp;
 }
 
 //обновить состояние
 void FloorHeating::upd()
 {
+  if(this->state == 0) {
+    digitalWrite(RPIN, LOW);  // Выключаем реле
+    return;
+  }
+
   // Чтение текущей температуры
   float currentTemperature = gettemp();
 
-  float upperLimit = state + hysteresis;
-  float lowerLimit = state - hysteresis;
+  float upperLimit = this->state + hysteresis;
+  float lowerLimit = this->state - hysteresis;
 
   // Применение гистерезиса
   if (currentTemperature > upperLimit) {
-    digitalWrite(RPIN, LOW);  // Включаем реле
+    digitalWrite(RPIN, LOW);  // Выключаем реле
   } else if (currentTemperature < lowerLimit) {
-    digitalWrite(RPIN, HIGH);  // Выключаем реле
+    digitalWrite(RPIN, HIGH);  // Включаем реле
   }
 }

@@ -4,6 +4,7 @@
 #include "OutR_0_10v.h"
 #include "OutPWM.h"
 #include "FloorHeating.h"
+#include "Switch.h"
 
 #include "LEDController.h"
 #include "SH_Rs485Controller.h"
@@ -19,20 +20,22 @@
 ///-----------------------------------------------------
 Relay relay2__2_nc(19);  // Реле вых2|вык
 Relay relay3__3_nc(18);  // Реле вых3|вык
-Relay relay4__4_nc(5);   // Реле вых4|вык
+Relay relay4__4_nc(23);   // Реле вых4|вык
 
-Relay relay5__51_52(12);        // Реле вых51|вых52
-Relay relay6__61_62(14);        // Реле вых61|вых62
-Relay2 relay7_8__71_72(4, 13);  // Реле вых71|вых72
+Relay relay5__51_52(32);        // Реле вых51|вых52
+Relay relay6__61_62(33);        // Реле вых61|вых62
+Relay2 relay7_8__71_72(27, 14);  // Реле вых71|вых72
 
-OutR_0_10v outr_0_10v(15, 25);  //Выход 0-10В + реле
+OutR_0_10v outr_0_10v(4, 25);  //Выход 0-10В + реле
 
 OutPWM outpwm1(26);  //Выход ШИМ 1
-OutPWM outpwm2(23);  //Выход ШИМ 2
+OutPWM outpwm2(13);  //Выход ШИМ 2
 
 FloorHeating floorheating(36, 21);  //Термодатчик + Реле вых1
 
-DeviceBase* devices[] = { &relay2__2_nc, &relay3__3_nc, &relay4__4_nc, &relay5__51_52, &relay6__61_62, &relay7_8__71_72, &outr_0_10v, &outpwm1, &outpwm2 };
+Switch swich(34); //выключатель (датчик открытия шкафа)
+
+DeviceBase* devices[] = { &relay2__2_nc, &relay3__3_nc, &relay4__4_nc, &relay5__51_52, &relay6__61_62, &relay7_8__71_72, &outr_0_10v, &outpwm1, &outpwm2, &floorheating, &swich };
 
 ///-----------------------------------------------------
 LEDController boardLedController(BoardLedPin);                                      // Создание объекта класса для управления светодиодом, подключенным к пину BoardLedPin
