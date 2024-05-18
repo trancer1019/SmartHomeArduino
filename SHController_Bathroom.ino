@@ -26,7 +26,8 @@ Relay relay5__51_52(32);        // Реле вых51|вых52
 Relay relay6__61_62(33);        // Реле вых61|вых62
 Relay2 relay7_8__71_72(27, 14);  // Реле вых71|вых72
 
-OutR_0_10v outr_0_10v(4, 25);  //Выход 0-10В + реле
+//OutR_0_10v outr_0_10v(4, 25);  //Выход 0-10В + реле
+Relay2 relay9_10__vent2(4, 25);  // Реле вых. вент. кухня
 
 OutPWM outpwm1(26);  //Выход ШИМ 1
 OutPWM outpwm2(13);  //Выход ШИМ 2
@@ -35,7 +36,7 @@ FloorHeating floorheating(36, 21);  //Термодатчик + Реле вых1
 
 Switch swich(34); //выключатель (датчик открытия шкафа)
 
-DeviceBase* devices[] = { &relay2__2_nc, &relay3__3_nc, &relay4__4_nc, &relay5__51_52, &relay6__61_62, &relay7_8__71_72, &outr_0_10v, &outpwm1, &outpwm2, &floorheating, &swich };
+DeviceBase* devices[] = { &relay2__2_nc, &relay3__3_nc, &relay4__4_nc, &relay5__51_52, &relay6__61_62, &relay7_8__71_72, &relay9_10__vent2/*&outr_0_10v*/, &outpwm1, &outpwm2, &floorheating, &swich };
 
 ///-----------------------------------------------------
 LEDController boardLedController(BoardLedPin);                                      // Создание объекта класса для управления светодиодом, подключенным к пину BoardLedPin
